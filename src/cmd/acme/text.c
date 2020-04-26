@@ -1,4 +1,4 @@
-#include <u.h>
+ #include <u.h>
 #include <libc.h>
 #include <draw.h>
 #include <thread.h>
@@ -690,6 +690,39 @@ texttype(Text *t, Rune r)
 		typecommit(t);
 		if(t->q1 < t->file->b.nc)
 			textshow(t, t->q1+1, t->q1+1, TRUE);
+		return;
+	case Kmod1+Kdown: /* Mod1+down moves cursor down one line */
+		typecommit(t);
+		nnb = 0;
+		if(t->q0>0 && textreadc(t, t->q0-1)!='\n')
+			nnb = textbswidth(t, 0x15);
+		q0 = t->q0;
+		while(q0<t->file->b.nc && textreadc(t, q0)!='\n')
+			q0++;
+		q0++;
+		while(q0<t->file->b.nc && nnb > 0 && textreadc(t, q0)!='\n')
+		{
+			nnb--;
+			q0++;
+		}
+		if(q0<t->file->b.nc)
+			textshow(t, q0, q0, TRUE);
+		return;
+	case Kmod1+Kup:   /* Mod1+up moves cursor up one line */
+		typecommit(t);
+		nnb = 0;
+		if(t->q0>0 && textreadc(t, t->q0-1)!='\n')
+			nnb = textbswidth(t, 0x15);
+		q0 = t->q0 - nnb - 2;
+		while(textreadc(t, q0)!='\n')
+			q0--;
+		q0++;
+		while(nnb >0 && textreadc(t, q0)!='\n')
+		{
+			nnb--;
+			q0++;
+		}
+		textshow(t, q0, q0, TRUE);
 		return;
 	case Kdown:
 		if(t->what == Tag)

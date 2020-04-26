@@ -140,6 +140,14 @@ scroll(Flayer *l, int but)
 				p0 = l->origin+frcharofpt(&l->f, Pt(s.max.x, my));
 				rt = scrpos(l->scroll, p0, p0+l->f.nchars, tot);
 				y = rt.min.y;
+			}else if(but == 8){
+				p0 = l->origin-1;
+				rt = scrpos(l->scroll, p0, p0+l->f.nchars, tot);
+				y = rt.min.y;
+			}else if(but == 16){
+				p0 = l->origin+1;
+				rt = scrpos(l->scroll, p0, p0+l->f.nchars, tot);
+				y = rt.min.y;
 			}
 			if(y != oy){
 				scrunmark(l, r);
@@ -161,6 +169,14 @@ scroll(Flayer *l, int but)
 				p0 = tot*(y-s.min.y)/h;
 		}else if(but == 3){
 			p0 = l->origin+frcharofpt(&l->f, Pt(s.max.x, my));
+			if(p0 > tot)
+				p0 = tot;
+		}else if(but == 8){
+			p0 = l->origin-1;
+			if(p0 > tot)
+				p0 = tot;
+		}else if(but == 16){
+			p0 = l->origin+1;
 			if(p0 > tot)
 				p0 = tot;
 		}

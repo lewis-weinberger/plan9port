@@ -1,3 +1,33 @@
+**DISCLAIMER**: This is a fork of [9fans/plan9port](https://github.com/9fans/plan9port) including the following changes.
+
+### `sam`
+- Focus follows mouse, rather than click-to-type.
+- [TODO] Scroll wheel can be used to scroll by a line at a time.
+- Additional (non-conflicting) keybindings under X:
+    - **Shift+Ctrl+C** Snarf
+    - **Shift+Ctrl+X** Cut
+    - **Shift+Ctrl+V** Paste
+    - [TODO] **Shift+Ctrl+Z** Undo
+    - [TODO]**Shift+Ctrl+R** Redo
+    - [TODO]**Alt+Up** Move text cursor up one line.
+    - [TODO]**Alt+Down** Move text cursor down one line.
+
+### `acme`
+- Additional (non-conflicting) keybindings under X:
+    - **Shift+Ctrl+C** Snarf
+    - **Shift+Ctrl+X** Cut
+    - **Shift+Ctrl+V** Paste
+    - **Shift+Ctrl+Z** Undo
+    - **Shift+Ctrl+R** Redo
+    - [TODO] **Alt+Up** Move text cursor up one line.
+    - [TODO] **Alt+Down** Move text cursor down one line.
+
+The new keybindings required some minor tweaks to `devdraw`'s handling of keyboard input under X.
+
+*And now back to our regularly scheduled programming*... please find the original README below.
+
+---
+
 This is a port of many Plan 9 libraries and programs to Unix.
 
 Installation

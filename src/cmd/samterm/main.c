@@ -142,6 +142,13 @@ threadmain(int argc, char *argv[])
 					scroll(which, 3);
 				else
 					menu3hit();
+			}else if((mousep->buttons&(8|16))){
+				if((mousep->buttons&8))
+					scroll(which, 8);
+				else
+					scroll(which, 16);
+			}else if(nwhich && nwhich!=which){
+				current(nwhich);
 			}
 			mouseunblock();
 		}
@@ -497,6 +504,12 @@ flushtyping(int clearesc)
 #define	CUT	(Kcmd+'x')
 #define	COPY	(Kcmd+'c')
 #define	PASTE	(Kcmd+'v')
+#define	CUT2	(Kshiftctl+'X')
+#define	COPY2	(Kshiftctl+'C')
+#define	PASTE2	(Kshiftctl+'V')
+#define	CUT3	(Kshiftctl+'x')
+#define	COPY3	(Kshiftctl+'c')
+#define	PASTE3	(Kshiftctl+'v')
 
 int
 nontypingkey(int c)
@@ -515,6 +528,12 @@ nontypingkey(int c)
 	case CUT:
 	case COPY:
 	case PASTE:
+	case CUT2:
+	case COPY2:
+	case PASTE2:
+	case CUT3:
+	case COPY3:
+	case PASTE3:
 		return 1;
 	}
 	return 0;
@@ -681,14 +700,20 @@ type(Flayer *l, int res)	/* what a bloody mess this is */
 				flsetselect(l, l->p0, l->p1);
 		switch(c) {
 		case CUT:
+		case CUT2:
+		case CUT3:
 			flushtyping(0);
 			cut(t, t->front, 1, 1);
 			break;
 		case COPY:
+		case COPY2:
+		case COPY3:
 			flushtyping(0);
 			snarf(t, t->front);
 			break;
 		case PASTE:
+		case PASTE2:
+		case PASTE3:
 			flushtyping(0);
 			paste(t, t->front);
 			break;
