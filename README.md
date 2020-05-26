@@ -2,7 +2,7 @@
 
 ### `sam`
 - Focus follows mouse, rather than click-to-type.
-- [TODO] Scroll wheel can be used to scroll by a line at a time.
+- Scroll wheel can be used to scroll by a page at a time.
 - Additional (non-conflicting) keybindings under X:
     - **Shift+Ctrl+C** Snarf
     - **Shift+Ctrl+X** Cut
