@@ -6,9 +6,9 @@
 
 |`acme`|`sam`|`9term`|input|action                         |
 |------|-----|-------|-----|-------------------------------|
-|✓     |✓    |✗      |cc   |Snarf                          |
-|✓     |✓    |✗      |xx   |Cut                            |
-|✓     |✓    |✗      |vv   |Paste                          |
+|✓     |✓    |✓      |cc   |Snarf                          |
+|✓     |✓    |✓      |xx   |Cut                            |
+|✓     |✓    |✓      |vv   |Paste                          |
 |✓     |✗    |✗      |zz   |Undo                           |
 |✓     |✗    |✗      |rr   |Redo                           |
 |✓     |✗    |✗      |kk   |Move text cursor up one line   |
