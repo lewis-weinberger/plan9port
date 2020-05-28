@@ -691,7 +691,7 @@ texttype(Text *t, Rune r)
 		if(t->q1 < t->file->b.nc)
 			textshow(t, t->q1+1, t->q1+1, TRUE);
 		return;
-	case Kmod1+Kdown: /* Mod1+down moves cursor down one line */
+    case 0xF206: /* Compose jj: move cursor down one line */
 		typecommit(t);
 		nnb = 0;
 		if(t->q0>0 && textreadc(t, t->q0-1)!='\n')
@@ -708,7 +708,7 @@ texttype(Text *t, Rune r)
 		if(q0<t->file->b.nc)
 			textshow(t, q0, q0, TRUE);
 		return;
-	case Kmod1+Kup:   /* Mod1+up moves cursor up one line */
+    case 0xF207:   /* Compose kk: move cursor up one line */
 		typecommit(t);
 		nnb = 0;
 		if(t->q0>0 && textreadc(t, t->q0-1)!='\n')
@@ -794,20 +794,17 @@ texttype(Text *t, Rune r)
 		textshow(t, q0, q0, TRUE);
 		return;
 	case Kcmd+'c':	/* %C: copy */
-	case Kshiftctl+'C': /* Shift+Ctrl+C: copy */
-	case Kshiftctl+'c': /* Shift+Ctrl+c: copy */
+	case 0xF200: /* Compose cc: copy */
 		typecommit(t);
 		cut(t, t, nil, TRUE, FALSE, nil, 0);
 		return;
 	case Kcmd+'z':	/* %Z: undo */
-	case Kshiftctl+'Z': /* Shift+Ctrl+Z: undo */
-	case Kshiftctl+'z': /* Shift+Ctrl+z: undo */
-	 	typecommit(t);
+	case 0xF204: /* Compose zz: undo */
+        typecommit(t);
 		undo(t, nil, nil, TRUE, 0, nil, 0);
 		return;
 	case Kcmd+'Z':	/* %-shift-Z: redo */
-	case Kshiftctl+'R': /* Shift+Ctrl+R: redo */
-	case Kshiftctl+'r': /* Shift+Ctrl+r: redo */
+	case 0xF205: /* Compose rr: redo */
 	 	typecommit(t);
 		undo(t, nil, nil, FALSE, 0, nil, 0);
 		return;
@@ -836,8 +833,7 @@ texttype(Text *t, Rune r)
 	/* cut/paste must be done after the seq++/filemark */
 	switch(r){
 	case Kcmd+'x':	/* %X: cut */
-	case Kshiftctl+'X': /* Shift+Ctrl+X: cut */
-	case Kshiftctl+'x': /* Shift+Ctrl+x: cut */
+	case 0xF201: /* Compose xx: cut */
 		typecommit(t);
 		if(t->what == Body){
 			seq++;
@@ -848,8 +844,7 @@ texttype(Text *t, Rune r)
 		t->iq1 = t->q0;
 		return;
 	case Kcmd+'v':	/* %V: paste */
-	case Kshiftctl + 'V': /* Shift+Ctrl+V: paste */
-	case Kshiftctl + 'v': /* Shift+Ctrl+v: paste */
+	case 0xF202: /* Compose vv: paste */
 		typecommit(t);
 		if(t->what == Body){
 			seq++;
